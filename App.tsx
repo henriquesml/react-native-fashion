@@ -1,10 +1,9 @@
-import 'react-native-gesture-handler';
-import * as React from 'react';
-
-import { createStackNavigator } from '@react-navigation/stack';
+import "react-native-gesture-handler";
+import React from "react";
+import { createStackNavigator } from "@react-navigation/stack";
 
 import LoadAssets from "./src/components/LoadAssets";
-import { Onboarding } from './src/Authentication';
+import { Onboarding } from "./src/Authentication";
 
 const fonts = {
   "SFProText-Bold": require("./assets/fonts/SF-Pro-Text-Bold.otf"),
@@ -16,16 +15,16 @@ const AuthenticationStack = createStackNavigator();
 
 const AuthenticationNavigator = () => {
   return (
-    <AuthenticationStack.Navigator headerMode="none" >
-      <AuthenticationStack.Screen name='Onboarding'component={Onboarding} />
+    <AuthenticationStack.Navigator headerMode="none">
+      <AuthenticationStack.Screen name="Onboarding" component={Onboarding} />
     </AuthenticationStack.Navigator>
   );
 };
 
 export default function App() {
   return (
-    <LoadAssets { ...{ fonts } } >
+    <LoadAssets {...{ fonts }}>
       <AuthenticationNavigator />
     </LoadAssets>
   );
-};
+}

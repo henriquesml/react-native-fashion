@@ -1,20 +1,47 @@
-import React from 'react';
-import { SlideContainer, TitleContainer, Title } from './styles';
+import React from "react";
+import { View, Text, Dimensions, StyleSheet } from "react-native";
+
+const { width, height } = Dimensions.get("window");
 
 interface SliderProps {
-  label: string,
-  right?: boolean,
+  title: string;
+  right?: boolean;
 }
 
-const Slide: React.FC<SliderProps> = ({ label, right = false }) => {
-  console.log(right)
+export const SLIDE_HEIGHT = 0.61 * height;
+
+const Slide: React.FC<SliderProps> = ({ title, right = false }) => {
+  const transform = [
+    { translateY: (SLIDE_HEIGHT - 100) / 2 },
+    { translateX: right ? width / 2 - 50 : -width / 2 + 50 },
+    { rotate: right ? "-90deg" : "90deg" },
+  ];
+
   return (
-    <SlideContainer>
-      <TitleContainer rightPosition={right}>
-        <Title>{label}</Title>
-      </TitleContainer>
-    </SlideContainer>
+    <View style={styles.container}>
+      <View style={[styles.titleContainer, { transform }]}>
+        <Text style={styles.title}>{title}</Text>
+      </View>
+    </View>
   );
-}
+};
+
+const styles = StyleSheet.create({
+  container: {
+    width,
+    flex: 1,
+  },
+  titleContainer: {
+    height: 100,
+    justifyContent: "center",
+  },
+  title: {
+    fontSize: 80,
+    lineHeight: 80,
+    fontFamily: "SFProText-Bold",
+    color: "white",
+    textAlign: "center",
+  },
+});
 
 export default Slide;
